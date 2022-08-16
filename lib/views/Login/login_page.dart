@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:library_flutter/components/ThemeSwitch/theme_switch.dart';
+import 'package:library_flutter/components/AppBar/custom_appbar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('WDA Livraria'),
-        actions: const [
-          ThemeSwitch(),
-        ],
-      ),
+    return const Scaffold(
+      appBar: CustomAppBar(false),
       body: Center(
-        child: const Text('Login'),
+        child: Text('Login'),
       ),
     );
   }

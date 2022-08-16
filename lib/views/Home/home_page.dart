@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:library_flutter/components/AppBar/custom_appbar.dart';
+import 'package:library_flutter/components/BottomBar/custom_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,46 +12,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
+    return const Scaffold(
+      appBar: CustomAppBar(false),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
-              child: const Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/publishers');
-              },
-              child: const Text('Editoras'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/books');
-              },
-              child: const Text('Livros'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/customers');
-              },
-              child: const Text('Clientes'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/rents');
-              },
-              child: const Text('Alugueis'),
-            ),
-          ],
-        ),
+        child: Text('Home'),
       ),
+      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }

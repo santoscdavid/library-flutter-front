@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:library_flutter/components/ThemeSwitch/theme_switch.dart';
+import 'package:library_flutter/components/AppBar/custom_appbar.dart';
+import '../../components/BottomBar/custom_bottom_bar.dart';
 
 class PublishersPage extends StatelessWidget {
   const PublishersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('WDA Livraria'),
-        actions: const [
-          ThemeSwitch(),
-        ],
-      ),
+    return const Scaffold(
+      appBar: CustomAppBar(false),
       body: Center(
-        child: const Text('Editoras'),
+        child: Text('Editoras'),
       ),
+      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }

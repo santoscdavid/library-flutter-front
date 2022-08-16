@@ -30,12 +30,12 @@ class _LibraryAppState extends State<LibraryApp> {
           ),
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) => HomePage(),
-            '/login': (context) => LoginPage(),
-            '/publishers': (context) => PublishersPage(),
-            '/books': (context) => BooksPage(),
-            '/customers': (context) => CustomersPage(),
-            '/rents': (context) => RentsPage(),
+            '/': (context) => const HomePage(),
+            '/login': (context) => const LoginPage(),
+            '/publishers': (context) => const PublishersPage(),
+            '/books': (context) => const BooksPage(),
+            '/customers': (context) => const CustomersPage(),
+            '/rents': (context) => const RentsPage(),
           },
         );
       }),
