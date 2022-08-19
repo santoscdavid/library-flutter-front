@@ -12,12 +12,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(false),
-      body: Center(
-        child: Text('Home'),
-      ),
-      bottomNavigationBar: CustomBottomBar(),
+    return Scaffold(
+      appBar: const CustomAppBar(false),
+      body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [
+            Center(
+              child: Text('Home'),
+            ),
+          ]),
+      bottomNavigationBar: const CustomBottomBar(),
     );
   }
 }

@@ -6,13 +6,18 @@ class DropdownMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              const PopupMenuItem(
-                child: Text('Perfil'),
-              ),
-              const PopupMenuItem(
-                child: Text('Logout'),
-              ),
-            ]);
+      icon: const Icon(
+        Icons.more_vert,
+        color: Colors.white,
+      ),
+      itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+        const PopupMenuItem(
+          child: Text('Perfil'),
+        ),
+        const PopupMenuItem(
+          child: Text('Logout'),
+        ),
+      ],
+    );
   }
 }

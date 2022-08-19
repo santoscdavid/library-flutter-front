@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/controllers/ThemeController/theme_controller.dart';
-import 'package:library_flutter/views/Books/books_page.dart';
-import 'package:library_flutter/views/Customers/customers_page.dart';
-
-import 'package:library_flutter/views/Home/home_page.dart';
-import 'package:library_flutter/views/Login/login_page.dart';
-import 'package:library_flutter/views/Publishers/publishers_page.dart';
-import 'package:library_flutter/views/Rents/rents_page.dart';
 
 class LibraryApp extends StatefulWidget {
   const LibraryApp({Key? key}) : super(key: key);
@@ -18,27 +13,18 @@ class LibraryApp extends StatefulWidget {
 class _LibraryAppState extends State<LibraryApp> {
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: ThemeController.instace,
-      builder: ((context, child) {
-        return MaterialApp(
-          theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
-            brightness: ThemeController.instace.isDarkTheme
-                ? Brightness.dark
-                : Brightness.light,
-          ),
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/': (context) => const HomePage(),
-            '/login': (context) => const LoginPage(),
-            '/publishers': (context) => const PublishersPage(),
-            '/books': (context) => const BooksPage(),
-            '/customers': (context) => const CustomersPage(),
-            '/rents': (context) => const RentsPage(),
-          },
-        );
-      }),
+    var store = Modular.get<ThemeController>();
+
+    return Observer(
+      builder: (_) => MaterialApp.router(
+        theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          brightness: store.isDarkMode ? Brightness.dark : Brightness.light,
+        ),
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: Modular.routeInformationParser,
+        routerDelegate: Modular.routerDelegate,
+      ),
     );
   }
 }

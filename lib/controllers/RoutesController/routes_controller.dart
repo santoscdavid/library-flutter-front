@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
-class RoutesController extends ChangeNotifier {
-  int index = 0;
+part 'routes_controller.g.dart';
 
-  changeIndex(int newIndex) {
-    index = newIndex;
+class RoutesController = RoutesBase with _$RoutesController;
 
-    notifyListeners();
+abstract class RoutesBase with Store {
+  @observable
+  int selectedIndex = 0;
+
+  @action
+  void changeIndex(newIndex) {
+    selectedIndex = newIndex;
   }
 }

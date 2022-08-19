@@ -14,7 +14,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         text: const TextSpan(
           children: [
             WidgetSpan(
-              child: Icon(Icons.bookmark, size: 20),
+              child: Icon(
+                Icons.bookmark,
+                size: 20,
+                color: Colors.white,
+              ),
             ),
             TextSpan(
               text: "WDA Livraria",

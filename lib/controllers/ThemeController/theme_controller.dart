@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
-class ThemeController extends ChangeNotifier {
-  static ThemeController instace = ThemeController();
+part 'theme_controller.g.dart';
 
-  bool isDarkTheme = false;
+class ThemeController = ThemeBase with _$ThemeController;
+
+abstract class ThemeBase with Store {
+  @observable
+  bool isDarkMode = false;
+
+  @observable
   var themeIcon = Icons.dark_mode;
 
-  changeTheme() {
-    if (isDarkTheme) {
+  @action
+  void changeTheme() {
+    if (isDarkMode) {
       themeIcon = Icons.dark_mode;
-      isDarkTheme = !isDarkTheme;
-
-      notifyListeners();
+      isDarkMode = !isDarkMode;
     } else {
       themeIcon = Icons.wb_sunny;
-      isDarkTheme = !isDarkTheme;
-
-      notifyListeners();
+      isDarkMode = !isDarkMode;
     }
   }
 }
