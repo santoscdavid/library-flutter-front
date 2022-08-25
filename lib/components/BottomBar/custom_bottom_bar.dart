@@ -57,6 +57,25 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           ],
           currentIndex: store.selectedIndex,
           onTap: (newIndex) {
+            if (newIndex != store.selectedIndex) {
+              switch (newIndex) {
+                case 0:
+                  Modular.to.navigate("/");
+                  break;
+                case 1:
+                  Modular.to.navigate("/publishers");
+                  break;
+                case 2:
+                  Modular.to.navigate("/books");
+                  break;
+                case 3:
+                  Modular.to.navigate("/customers");
+                  break;
+                case 4:
+                  Modular.to.navigate("/rents");
+                  break;
+              }
+            }
             store.changeIndex(newIndex);
           },
           backgroundColor: Colors.transparent,

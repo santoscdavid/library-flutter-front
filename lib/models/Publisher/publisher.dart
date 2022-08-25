@@ -1,11 +1,17 @@
 class Publisher {
-  final String id;
-  final String nome;
-  final String cidade;
+  dynamic id;
+  dynamic name;
+  dynamic city;
 
   Publisher({
-    required this.id,
-    required this.nome,
-    required this.cidade,
+    this.id,
+    required this.name,
+    required this.city,
   });
+
+  Publisher.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['nome'];
+    city = json['cidade'];
+  }
 }

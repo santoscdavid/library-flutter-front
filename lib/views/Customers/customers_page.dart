@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:library_flutter/components/AppBar/custom_appbar.dart';
-import '../../components/BottomBar/custom_bottom_bar.dart';
+import 'package:library_flutter/components/BottomBar/custom_bottom_bar.dart';
 
 class CustomersPage extends StatelessWidget {
   const CustomersPage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class CustomersPage extends StatelessWidget {
       body: Center(
         child: Text('Clientes'),
       ),
-        bottomNavigationBar: CustomBottomBar(),
+      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }
