@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:library_flutter/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/models/Publisher/publisher.dart';
 import 'package:library_flutter/store/PublisherStore/publisher_store.dart';
 
@@ -9,6 +11,7 @@ class ListPublishers extends StatelessWidget {
   final List<Publisher> listPubs;
 
   final store = Modular.get<PublisherStore>();
+  final storeTheme = Modular.get<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +23,39 @@ class ListPublishers extends StatelessWidget {
           decoration: const BoxDecoration(
               border:
                   Border(left: BorderSide(color: Colors.deepPurple, width: 2))),
-          child: RichText(
-            text: const TextSpan(
-              children: [
-                WidgetSpan(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 5),
+          child: Observer(builder: (_) {
+            return RichText(
+              text: TextSpan(
+                children: [
+                  const WidgetSpan(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5),
+                    ),
                   ),
-                ),
-                WidgetSpan(
-                  child: Icon(
-                    Icons.apartment,
-                    size: 28,
-                    color: Colors.deepPurple,
+                  const WidgetSpan(
+                    child: Icon(
+                      Icons.apartment,
+                      size: 28,
+                      color: Colors.deepPurple,
+                    ),
                   ),
-                ),
-                WidgetSpan(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+                  const WidgetSpan(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: "Editoras",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.deepPurple,
+                  TextSpan(
+                    text: "Editoras",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color:
+                          storeTheme.isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          }),
         ),
         const Padding(padding: EdgeInsets.all(5)),
         FittedBox(
