@@ -109,7 +109,10 @@ class ListPublishers extends StatelessWidget {
                           IconButton(
                             padding: const EdgeInsets.all(2),
                             constraints: const BoxConstraints(),
-                            onPressed: (() => {}),
+                            onPressed: (() => {
+                                  Modular.to.navigate(
+                                      "/publishers/form/${publisher.id}")
+                                }),
                             icon: const Icon(
                               Icons.edit,
                               size: 20,

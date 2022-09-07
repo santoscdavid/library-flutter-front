@@ -3,9 +3,7 @@ import 'package:library_flutter/components/DropdownMenu/dropdown_menu.dart';
 import 'package:library_flutter/components/ThemeSwitch/theme_switch.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar(this.isReturn, {Key? key}) : super(key: key);
-
-  final bool isReturn;
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       elevation: 20,
-      automaticallyImplyLeading: isReturn,
     );
   }
 

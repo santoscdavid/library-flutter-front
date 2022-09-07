@@ -15,7 +15,7 @@ class PublishersPage extends StatelessWidget {
 
     return Observer(
       builder: (_) => Scaffold(
-        appBar: const CustomAppBar(false),
+        appBar: const CustomAppBar(),
         body: store.publishers.isNotEmpty
             ? SingleChildScrollView(
                 child: SafeArea(
@@ -26,6 +26,30 @@ class PublishersPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
         bottomNavigationBar: const CustomBottomBar(),
+        floatingActionButton: FloatingActionButton(
+          elevation: 2.0,
+          onPressed: (() => {
+                Modular.to.navigate("/publishers/form"),
+              }),
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [
+                  Colors.purpleAccent,
+                  Colors.purple,
+                  Colors.deepPurple,
+                ],
+              ),
+            ),
+            child: const Icon(
+              Icons.add,
+              size: 30,
+            ),
+          ),
+        ),
       ),
     );
   }

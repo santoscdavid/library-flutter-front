@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(false),
+      appBar: const CustomAppBar(),
       body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           children: const [

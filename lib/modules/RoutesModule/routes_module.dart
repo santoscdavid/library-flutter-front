@@ -11,7 +11,7 @@ class RoutesModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ModuleRoute(
-          '/',
+          '/publishers',
           module: PublishersModule(),
         ),
         ChildRoute(
