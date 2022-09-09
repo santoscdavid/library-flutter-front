@@ -25,12 +25,36 @@ mixin _$PublisherStore on PublisherStoreBase, Store {
     });
   }
 
+  late final _$cachedPublishersAtom =
+      Atom(name: 'PublisherStoreBase.cachedPublishers', context: context);
+
+  @override
+  List<Publisher> get cachedPublishers {
+    _$cachedPublishersAtom.reportRead();
+    return super.cachedPublishers;
+  }
+
+  @override
+  set cachedPublishers(List<Publisher> value) {
+    _$cachedPublishersAtom.reportWrite(value, super.cachedPublishers, () {
+      super.cachedPublishers = value;
+    });
+  }
+
   late final _$getAllPublishersAsyncAction =
       AsyncAction('PublisherStoreBase.getAllPublishers', context: context);
 
   @override
   Future getAllPublishers() {
     return _$getAllPublishersAsyncAction.run(() => super.getAllPublishers());
+  }
+
+  late final _$filterAsyncAction =
+      AsyncAction('PublisherStoreBase.filter', context: context);
+
+  @override
+  Future filter(String value) {
+    return _$filterAsyncAction.run(() => super.filter(value));
   }
 
   late final _$createPublisherAsyncAction =
@@ -54,7 +78,8 @@ mixin _$PublisherStore on PublisherStoreBase, Store {
   @override
   String toString() {
     return '''
-publishers: ${publishers}
+publishers: ${publishers},
+cachedPublishers: ${cachedPublishers}
     ''';
   }
 }

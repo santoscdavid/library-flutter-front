@@ -11,20 +11,14 @@ class PublishersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = Modular.get<PublisherStore>();
-
     return Observer(
       builder: (_) => Scaffold(
         appBar: const CustomAppBar(),
-        body: store.publishers.isNotEmpty
-            ? SingleChildScrollView(
-                child: SafeArea(
-                  child: ListPublishers(listPubs: store.publishers),
-                ),
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: ListPublishers(),
+          ),
+        ),
         bottomNavigationBar: const CustomBottomBar(),
         floatingActionButton: FloatingActionButton(
           elevation: 2.0,

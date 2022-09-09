@@ -19,9 +19,34 @@ abstract class PublisherStoreBase with Store {
   @observable
   List<Publisher> publishers = [];
 
+  @observable
+  List<Publisher> cachedPublishers = [];
+
   @action
   getAllPublishers() async {
     publishers = await repository.getAll();
+    cachedPublishers = publishers;
+  }
+
+  @action
+  filter(String value) async {
+    if (value.isEmpty) {
+      publishers = cachedPublishers;
+    }
+
+    List<Publisher> list = publishers
+        .where(
+          (e) =>
+              e.name.toString().toLowerCase().contains(
+                    (value.toLowerCase()),
+                  ) ||
+              e.city.toString().toLowerCase().contains(
+                    (value.toLowerCase()),
+                  ),
+        )
+        .toList();
+
+    publishers = list;
   }
 
   @action
