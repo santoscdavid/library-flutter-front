@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/models/Publisher/publisher.dart';
 import 'package:library_flutter/store/PublisherStore/publisher_store.dart';
+import 'package:library_flutter/utils/global_scaffold.dart';
 
 class ListPublishers extends StatelessWidget {
   ListPublishers({Key? key, required this.listPubs}) : super(key: key);
@@ -32,11 +33,13 @@ class ListPublishers extends StatelessWidget {
                       padding: EdgeInsets.only(left: 5),
                     ),
                   ),
-                  const WidgetSpan(
+                  WidgetSpan(
                     child: Icon(
                       Icons.apartment,
                       size: 28,
-                      color: Colors.deepPurple,
+                      color: storeTheme.isDarkMode
+                          ? Colors.grey
+                          : Colors.deepPurple,
                     ),
                   ),
                   const WidgetSpan(
@@ -62,8 +65,8 @@ class ListPublishers extends StatelessWidget {
           child: DataTable(
             showCheckboxColumn: false,
             headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Colors.deepPurpleAccent),
-            headingTextStyle: const TextStyle(color: Colors.white),
+              (states) => Colors.black12,
+            ),
             headingRowHeight: 35,
             columns: const <DataColumn>[
               DataColumn(
@@ -122,7 +125,19 @@ class ListPublishers extends StatelessWidget {
                           IconButton(
                             padding: const EdgeInsets.all(2),
                             constraints: const BoxConstraints(),
-                            onPressed: (() => {}),
+                            onPressed: (() => {
+                                  showSnackbar(
+                                    const SnackBar(
+                                      elevation: 2,
+                                      backgroundColor: Colors.redAccent,
+                                      content: Text(
+                                        "Deletar!",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      duration: Duration(milliseconds: 1500),
+                                    ),
+                                  ),
+                                }),
                             icon: const Icon(
                               Icons.delete,
                               size: 20,
@@ -137,6 +152,7 @@ class ListPublishers extends StatelessWidget {
                 .toList(),
           ),
         ),
+        const Padding(padding: EdgeInsets.symmetric(vertical: 50)),
       ],
     );
   }

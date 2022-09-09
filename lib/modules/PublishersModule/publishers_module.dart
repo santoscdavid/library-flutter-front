@@ -16,16 +16,15 @@ class PublishersModule extends Module {
         ChildRoute(
           '/',
           child: (context, args) => const PublishersPage(),
-          transition: TransitionType.defaultTransition,
-          duration: const Duration(milliseconds: 500),
         ),
         ChildRoute(
           '/form/:id',
           child: (context, args) => FormPublisher(
-            args.params["id"],
-          ),
+              id: args.params["id"],
+              name: args.queryParams["name"],
+              city: args.queryParams["city"]),
           transition: TransitionType.downToUp,
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 700),
         ),
       ];
 }

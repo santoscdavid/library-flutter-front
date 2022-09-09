@@ -29,7 +29,7 @@ class PublishersPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           elevation: 2.0,
           onPressed: (() => {
-                Modular.to.navigate("/publishers/form"),
+                Modular.to.navigate("/publishers/form/"),
               }),
           child: Container(
             width: 60,
@@ -47,6 +47,7 @@ class PublishersPage extends StatelessWidget {
             child: const Icon(
               Icons.add,
               size: 30,
+              color: Colors.white,
             ),
           ),
         ),
