@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:library_flutter/models/Publisher/publisher.dart';
 import 'package:http/http.dart' as http;
-import 'package:library_flutter/utils/global_scaffold.dart';
 
 class PublishersRepository {
   final String _baseUrl = "http://localhost:5000/api/v3";
@@ -26,24 +24,30 @@ class PublishersRepository {
   }
 
   Future<void> post(Publisher publisher) async {
-    try {
-      final response = await http.post(
-        Uri.parse('$_baseUrl/Editora'),
-        body: jsonEncode(
-          {'nome': publisher.name, 'cidade': publisher.city},
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw Exception();
-      } else {
-        showSnackbar(const SnackBar(
-          content: Text("!"),
-          duration: Duration(seconds: 1),
-          backgroundColor: Colors.green,
-        ));
-      }
-    } catch (err) {
-      print(err);
-    }
+    await http.post(
+      Uri.parse('$_baseUrl/Editora'),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode(
+        {'nome': publisher.name, 'cidade': publisher.city},
+      ),
+      encoding: Encoding.getByName("utf-8"),
+    );
+  }
+
+  Future<void> put(Publisher publisher) async {
+    await http.put(
+      Uri.parse('$_baseUrl/Editora/${publisher.id}'),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode(
+        {'id': publisher.id, 'nome': publisher.name, 'cidade': publisher.city},
+      ),
+      encoding: Encoding.getByName("utf-8"),
+    );
   }
 }

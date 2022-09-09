@@ -61,95 +61,97 @@ class ListPublishers extends StatelessWidget {
           }),
         ),
         const Padding(padding: EdgeInsets.all(5)),
-        FittedBox(
-          child: DataTable(
-            showCheckboxColumn: false,
-            headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Colors.black12,
-            ),
-            headingRowHeight: 35,
-            columns: const <DataColumn>[
-              DataColumn(
-                label: SizedBox(child: Text('Id')),
+        Observer(
+          builder: (_) => FittedBox(
+            child: DataTable(
+              showCheckboxColumn: false,
+              headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Colors.black12,
               ),
-              DataColumn(
-                label: SizedBox(child: Text('Nome')),
-              ),
-              DataColumn(
-                label: SizedBox(child: Text('Cidade')),
-              ),
-              DataColumn(
-                label: SizedBox(child: Text('Opções')),
-              ),
-            ],
-            rows: listPubs
-                .map(
-                  (publisher) => DataRow(
-                    cells: <DataCell>[
-                      DataCell(
-                        SizedBox(
-                          child: Text(
-                            publisher.id.toString(),
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        SizedBox(
-                          child: Text(
-                            publisher.name.toString(),
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        SizedBox(
-                          child: Text(
-                            publisher.city.toString(),
-                          ),
-                        ),
-                      ),
-                      DataCell(Row(
-                        children: [
-                          IconButton(
-                            padding: const EdgeInsets.all(2),
-                            constraints: const BoxConstraints(),
-                            onPressed: (() => {
-                                  Modular.to.navigate(
-                                      "/publishers/form/${publisher.id}")
-                                }),
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 20,
-                              color: Colors.deepOrange,
+              headingRowHeight: 35,
+              columns: const <DataColumn>[
+                DataColumn(
+                  label: SizedBox(child: Text('Id')),
+                ),
+                DataColumn(
+                  label: SizedBox(child: Text('Nome')),
+                ),
+                DataColumn(
+                  label: SizedBox(child: Text('Cidade')),
+                ),
+                DataColumn(
+                  label: SizedBox(child: Text('Opções')),
+                ),
+              ],
+              rows: listPubs
+                  .map(
+                    (publisher) => DataRow(
+                      cells: <DataCell>[
+                        DataCell(
+                          SizedBox(
+                            child: Text(
+                              publisher.id.toString(),
                             ),
                           ),
-                          IconButton(
-                            padding: const EdgeInsets.all(2),
-                            constraints: const BoxConstraints(),
-                            onPressed: (() => {
-                                  showSnackbar(
-                                    const SnackBar(
-                                      elevation: 2,
-                                      backgroundColor: Colors.redAccent,
-                                      content: Text(
-                                        "Deletar!",
-                                        style: TextStyle(color: Colors.white),
+                        ),
+                        DataCell(
+                          SizedBox(
+                            child: Text(
+                              publisher.name.toString(),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          SizedBox(
+                            child: Text(
+                              publisher.city.toString(),
+                            ),
+                          ),
+                        ),
+                        DataCell(Row(
+                          children: [
+                            IconButton(
+                              padding: const EdgeInsets.all(2),
+                              constraints: const BoxConstraints(),
+                              onPressed: (() => {
+                                    Modular.to.navigate(
+                                        "/publishers/form/${publisher.id}?name=${publisher.name}&city=${publisher.city}")
+                                  }),
+                              icon: const Icon(
+                                Icons.edit,
+                                size: 20,
+                                color: Colors.deepOrange,
+                              ),
+                            ),
+                            IconButton(
+                              padding: const EdgeInsets.all(2),
+                              constraints: const BoxConstraints(),
+                              onPressed: (() => {
+                                    showSnackbar(
+                                      const SnackBar(
+                                        elevation: 2,
+                                        backgroundColor: Colors.redAccent,
+                                        content: Text(
+                                          "Deletar!",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        duration: Duration(milliseconds: 1500),
                                       ),
-                                      duration: Duration(milliseconds: 1500),
                                     ),
-                                  ),
-                                }),
-                            icon: const Icon(
-                              Icons.delete,
-                              size: 20,
-                              color: Colors.red,
+                                  }),
+                              icon: const Icon(
+                                Icons.delete,
+                                size: 20,
+                                color: Colors.red,
+                              ),
                             ),
-                          ),
-                        ],
-                      )),
-                    ],
-                  ),
-                )
-                .toList(),
+                          ],
+                        )),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 50)),

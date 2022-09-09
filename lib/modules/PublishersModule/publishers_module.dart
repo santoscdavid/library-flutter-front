@@ -20,9 +20,10 @@ class PublishersModule extends Module {
         ChildRoute(
           '/form/:id',
           child: (context, args) => FormPublisher(
-              id: args.params["id"],
-              name: args.queryParams["name"],
-              city: args.queryParams["city"]),
+            id: args.params["id"],
+            name: args.queryParams["name"],
+            city: args.queryParams["city"],
+          ),
           transition: TransitionType.downToUp,
           duration: const Duration(milliseconds: 700),
         ),

@@ -10,6 +10,7 @@ class FormInput extends StatelessWidget {
     this.changeFocus,
     required this.onSave,
     required this.validator,
+    required this.initialValue,
   }) : super(key: key);
 
   final String title;
@@ -19,12 +20,13 @@ class FormInput extends StatelessWidget {
   final FocusNode? changeFocus;
   final void Function(String?) onSave;
   final String? Function(String?) validator;
-
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(margin),
       child: TextFormField(
+        initialValue: initialValue,
         cursorColor: Colors.deepPurple,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),

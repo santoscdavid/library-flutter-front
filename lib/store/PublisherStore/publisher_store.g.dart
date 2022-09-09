@@ -33,6 +33,24 @@ mixin _$PublisherStore on PublisherStoreBase, Store {
     return _$getAllPublishersAsyncAction.run(() => super.getAllPublishers());
   }
 
+  late final _$createPublisherAsyncAction =
+      AsyncAction('PublisherStoreBase.createPublisher', context: context);
+
+  @override
+  Future createPublisher(Publisher publisher) {
+    return _$createPublisherAsyncAction
+        .run(() => super.createPublisher(publisher));
+  }
+
+  late final _$updatePublisherAsyncAction =
+      AsyncAction('PublisherStoreBase.updatePublisher', context: context);
+
+  @override
+  Future updatePublisher(Publisher publisher) {
+    return _$updatePublisherAsyncAction
+        .run(() => super.updatePublisher(publisher));
+  }
+
   @override
   String toString() {
     return '''
