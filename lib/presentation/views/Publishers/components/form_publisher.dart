@@ -141,6 +141,7 @@ class _FormPublisherState extends State<FormPublisher> {
                       CustomButton(
                         margin: 10.0,
                         function: () => _submitForm,
+                        child: const Text('Salvar'),
                       )
                     ],
                   ),

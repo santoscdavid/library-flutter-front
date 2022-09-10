@@ -5,10 +5,12 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.margin,
     required this.function,
+    required this.child,
   }) : super(key: key);
 
   final double margin;
   final Function function;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             primary: Colors.transparent, shadowColor: Colors.transparent),
         onPressed: function(),
-        child: const Text('Salvar'),
+        child: child,
       ),
     );
   }

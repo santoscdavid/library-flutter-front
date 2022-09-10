@@ -17,6 +17,9 @@ abstract class PublisherControllerBase with Store {
   }
 
   @observable
+  bool isLoading = false;
+
+  @observable
   List<Publisher> publishers = [];
 
   @observable
@@ -24,12 +27,21 @@ abstract class PublisherControllerBase with Store {
 
   @action
   getAllPublishers() async {
-    publishers = await repository.getAll();
-    cachedPublishers = publishers;
+    isLoading = true;
+
+    try {
+      publishers = await repository.getAll();
+      cachedPublishers = publishers;
+
+      isLoading = false;
+    } catch (e) {
+      CustomSnackBar().error('Houve um problema ao listar editoras');
+    }
   }
 
   @action
   filter(String value) async {
+    isLoading = true;
     if (value.isEmpty) {
       publishers = cachedPublishers;
     }
@@ -50,6 +62,7 @@ abstract class PublisherControllerBase with Store {
         .toList();
 
     publishers = list;
+    isLoading = false;
   }
 
   @action

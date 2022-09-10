@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/controllers/PublisherController/publisher_controller.dart';
 import 'package:library_flutter/app/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/app/utils/compare_helpers.dart';
+import 'package:library_flutter/presentation/components/CustomButton/custom_button.dart';
 import 'package:library_flutter/presentation/components/DeleteDialog/delete_dialog.dart';
 import 'package:library_flutter/presentation/components/SearchInput/search_input.dart';
 import 'package:library_flutter/presentation/components/TitlePage/title_page.dart';
@@ -158,8 +159,41 @@ class _ListPublishersState extends State<ListPublishers> {
                         )
                         .toList(),
                   )
-                : const Center(
-                    child: CircularProgressIndicator(),
+                : Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 50, horizontal: 50),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        const Icon(
+                          Icons.mood_bad_rounded,
+                          size: 40,
+                          color: Colors.deepPurple,
+                        ),
+                        const Padding(padding: EdgeInsets.all(5)),
+                        const Text(
+                          "Não há nenhuma editora,\nou houve algum problema.",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        CustomButton(
+                          margin: 20,
+                          function: () => store.getAllPublishers,
+                          child: store.isLoading
+                              ? Container(
+                                  padding: const EdgeInsets.all(10),
+                                  width: 40.0,
+                                  height: 40.0,
+                                  child: const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const Text('Recarregar'),
+                        )
+                      ],
+                    )),
                   ),
           ),
         ),
@@ -167,4 +201,5 @@ class _ListPublishersState extends State<ListPublishers> {
       ],
     );
   }
+  // CircularProgressIndicator(),
 }
