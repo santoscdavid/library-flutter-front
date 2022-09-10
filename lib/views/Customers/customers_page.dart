@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-
-import '../../components/ThemeSwitch/theme_switch.dart';
+import 'package:library_flutter/components/AppBar/custom_appbar.dart';
+import 'package:library_flutter/components/BottomBar/custom_bottom_bar.dart';
 
 class CustomersPage extends StatelessWidget {
   const CustomersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('WDA Livraria'),
-        actions: const [
-          ThemeSwitch(),
-        ],
-      ),
+    return const Scaffold(
+      appBar: CustomAppBar(),
       body: Center(
-        child: const Text('Clientes'),
+        child: Text('Clientes'),
       ),
+      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }
