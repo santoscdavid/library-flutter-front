@@ -37,6 +37,9 @@ abstract class PublisherStoreBase with Store {
     List<Publisher> list = publishers
         .where(
           (e) =>
+              e.id.toString().toLowerCase().contains(
+                    value.toString(),
+                  ) ||
               e.name.toString().toLowerCase().contains(
                     (value.toLowerCase()),
                   ) ||
@@ -75,9 +78,26 @@ abstract class PublisherStoreBase with Store {
           );
       Modular.to.navigate('/publishers/');
     } catch (err) {
-      CustomSnackBar().success('Erro ao tentar editar a editora');
+      CustomSnackBar().error('Erro ao tentar editar a editora');
     } finally {
       await getAllPublishers();
+    }
+  }
+
+  deletePublisher(Publisher publisher) async {
+    {
+      try {
+        await repository.delete(publisher).then(
+              (res) => {
+                CustomSnackBar().success('Editora editada com sucesso!'),
+                Modular.to.pop()
+              },
+            );
+      } catch (err) {
+        CustomSnackBar().error('Erro ao tentar apagar a editora');
+      } finally {
+        await getAllPublishers();
+      }
     }
   }
 }

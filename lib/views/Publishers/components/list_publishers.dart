@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:library_flutter/components/DeleteDialog/delete_dialog.dart';
 import 'package:library_flutter/components/SearchInput/search_input.dart';
 import 'package:library_flutter/components/TitlePage/title_page.dart';
 import 'package:library_flutter/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/store/PublisherStore/publisher_store.dart';
 import 'package:library_flutter/utils/global_scaffold.dart';
-import 'package:skeletons/skeletons.dart';
 
 class ListPublishers extends StatelessWidget {
   ListPublishers({
@@ -100,21 +100,18 @@ class ListPublishers extends StatelessWidget {
                                   IconButton(
                                     padding: const EdgeInsets.all(2),
                                     constraints: const BoxConstraints(),
-                                    onPressed: (() => {
-                                          showSnackbar(
-                                            const SnackBar(
-                                              elevation: 2,
-                                              backgroundColor: Colors.redAccent,
-                                              content: Text(
-                                                "Deletar!",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 1500),
-                                            ),
-                                          ),
-                                        }),
+                                    onPressed: () {
+                                      deleteDialog(
+                                        context: context,
+                                        title:
+                                            'Apagar editora ${publisher.name}?',
+                                        text:
+                                            'Todo dado relacionado a essa editora será apagado.',
+                                        onConfirm: () {
+                                          store.deletePublisher(publisher);
+                                        },
+                                      );
+                                    },
                                     icon: const Icon(
                                       Icons.delete,
                                       size: 20,

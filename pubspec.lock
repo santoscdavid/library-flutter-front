@@ -410,13 +410,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  skeletons:
-    dependency: "direct main"
-    description:
-      name: skeletons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -522,4 +515,3 @@ packages:
     version: "3.1.1"
 sdks:
   dart: ">=2.17.6 <3.0.0"
-  flutter: ">=1.17.0"

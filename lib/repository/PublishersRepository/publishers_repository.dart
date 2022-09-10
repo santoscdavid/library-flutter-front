@@ -50,4 +50,16 @@ class PublishersRepository {
       encoding: Encoding.getByName("utf-8"),
     );
   }
+
+  Future<void> delete(Publisher publisher) async {
+    await http.delete(
+        Uri.parse(
+          '$_baseUrl/Editora/${publisher.id}',
+        ),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        encoding: Encoding.getByName("utf-8"));
+  }
 }
