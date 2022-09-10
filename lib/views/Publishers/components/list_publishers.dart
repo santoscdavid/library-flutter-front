@@ -6,15 +6,43 @@ import 'package:library_flutter/components/SearchInput/search_input.dart';
 import 'package:library_flutter/components/TitlePage/title_page.dart';
 import 'package:library_flutter/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/store/PublisherStore/publisher_store.dart';
-import 'package:library_flutter/utils/global_scaffold.dart';
+import 'package:library_flutter/utils/compare_helpers.dart';
 
-class ListPublishers extends StatelessWidget {
-  ListPublishers({
+class ListPublishers extends StatefulWidget {
+  const ListPublishers({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ListPublishers> createState() => _ListPublishersState();
+}
+
+class _ListPublishersState extends State<ListPublishers> {
   final store = Modular.get<PublisherStore>();
   final storeTheme = Modular.get<ThemeController>();
+  int? sortColunIndex;
+  bool isAscending = false;
+
+  void onSort(int columnIndex, bool ascending) {
+    if (columnIndex == 0) {
+      store.publishers.sort(
+        (a, b) => Compare().compareInt(ascending, a.id, b.id),
+      );
+    } else if (columnIndex == 1) {
+      store.publishers.sort(
+        (a, b) => Compare().compareString(ascending, a.name, b.name),
+      );
+    } else if (columnIndex == 2) {
+      store.publishers.sort(
+        (a, b) => Compare().compareString(ascending, a.city, b.city),
+      );
+    }
+
+    setState(() {
+      sortColunIndex = columnIndex;
+      isAscending = ascending;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +66,27 @@ class ListPublishers extends StatelessWidget {
           builder: (_) => FittedBox(
             child: store.publishers.isNotEmpty
                 ? DataTable(
+                    sortColumnIndex: sortColunIndex,
+                    sortAscending: isAscending,
                     showCheckboxColumn: false,
                     headingRowColor: MaterialStateColor.resolveWith(
                       (states) => Colors.black12,
                     ),
                     headingRowHeight: 35,
-                    columns: const <DataColumn>[
+                    columns: <DataColumn>[
                       DataColumn(
-                        label: SizedBox(child: Text('Id')),
+                        label: const SizedBox(child: Text('Id')),
+                        onSort: onSort,
                       ),
                       DataColumn(
-                        label: SizedBox(child: Text('Nome')),
+                        label: const SizedBox(child: Text('Nome')),
+                        onSort: onSort,
                       ),
                       DataColumn(
-                        label: SizedBox(child: Text('Cidade')),
+                        label: const SizedBox(child: Text('Cidade')),
+                        onSort: onSort,
                       ),
-                      DataColumn(
+                      const DataColumn(
                         label: SizedBox(child: Text('Opções')),
                       ),
                     ],
