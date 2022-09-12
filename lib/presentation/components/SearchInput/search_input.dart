@@ -10,11 +10,14 @@ class SearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 15, 10, 0),
-      height: SizeConfig().heightSize(context, 5),
+      height: SizeConfig().heightSize(context, 6),
       width: SizeConfig().widthSize(context, 50),
       child: TextField(
+        textAlignVertical: TextAlignVertical.center,
         onChanged: onChange,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          isDense: true,
           suffixIcon: const Icon(Icons.search),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(

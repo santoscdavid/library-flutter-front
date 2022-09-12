@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:library_flutter/presentation/components/AddButton/add_button.dart';
 import 'package:library_flutter/presentation/components/AppBar/custom_appbar.dart';
 import 'package:library_flutter/presentation/views/Publishers/components/list_publishers.dart';
 import '../../components/BottomBar/custom_bottom_bar.dart';
@@ -19,30 +20,10 @@ class PublishersPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: const CustomBottomBar(),
-        floatingActionButton: FloatingActionButton(
-          elevation: 2.0,
-          onPressed: (() => {
-                Modular.to.navigate("/publishers/form/"),
-              }),
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  Colors.purpleAccent,
-                  Colors.purple,
-                  Colors.deepPurple,
-                ],
-              ),
-            ),
-            child: const Icon(
-              Icons.add,
-              size: 30,
-              color: Colors.white,
-            ),
-          ),
+        floatingActionButton: AddButton(
+          function: () => {
+            Modular.to.navigate("/publishers/form/"),
+          },
         ),
       ),
     );

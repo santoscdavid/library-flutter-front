@@ -102,7 +102,7 @@ abstract class PublisherControllerBase with Store {
       try {
         await repository.delete(publisher).then(
               (res) => {
-                CustomSnackBar().success('Editora editada com sucesso!'),
+                CustomSnackBar().success('Editora apagada com sucesso!'),
                 Modular.to.pop()
               },
             );
