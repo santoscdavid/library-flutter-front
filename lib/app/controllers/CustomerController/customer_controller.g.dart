@@ -57,12 +57,12 @@ mixin _$CustomerController on CustomerControllerBase, Store {
     });
   }
 
-  late final _$getAllPublishersAsyncAction =
-      AsyncAction('CustomerControllerBase.getAllPublishers', context: context);
+  late final _$getAllCustomersAsyncAction =
+      AsyncAction('CustomerControllerBase.getAllCustomers', context: context);
 
   @override
-  Future getAllPublishers() {
-    return _$getAllPublishersAsyncAction.run(() => super.getAllPublishers());
+  Future getAllCustomers() {
+    return _$getAllCustomersAsyncAction.run(() => super.getAllCustomers());
   }
 
   late final _$filterAsyncAction =
@@ -73,22 +73,22 @@ mixin _$CustomerController on CustomerControllerBase, Store {
     return _$filterAsyncAction.run(() => super.filter(value));
   }
 
-  late final _$createPublisherAsyncAction =
-      AsyncAction('CustomerControllerBase.createPublisher', context: context);
+  late final _$createCustomerAsyncAction =
+      AsyncAction('CustomerControllerBase.createCustomer', context: context);
 
   @override
-  Future createPublisher(Customer customer) {
-    return _$createPublisherAsyncAction
-        .run(() => super.createPublisher(customer));
+  Future createCustomer(Customer customer) {
+    return _$createCustomerAsyncAction
+        .run(() => super.createCustomer(customer));
   }
 
-  late final _$updatePublisherAsyncAction =
-      AsyncAction('CustomerControllerBase.updatePublisher', context: context);
+  late final _$updateCustomerAsyncAction =
+      AsyncAction('CustomerControllerBase.updateCustomer', context: context);
 
   @override
-  Future updatePublisher(Customer customer) {
-    return _$updatePublisherAsyncAction
-        .run(() => super.updatePublisher(customer));
+  Future updateCustomer(Customer customer) {
+    return _$updateCustomerAsyncAction
+        .run(() => super.updateCustomer(customer));
   }
 
   @override

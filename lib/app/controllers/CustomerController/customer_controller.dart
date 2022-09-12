@@ -13,7 +13,7 @@ abstract class CustomerControllerBase with Store {
   final CustomerRepository repository;
 
   CustomerControllerBase(this.repository) {
-    getAllPublishers();
+    getAllCustomers();
   }
 
   @observable
@@ -26,7 +26,7 @@ abstract class CustomerControllerBase with Store {
   List<Customer> cachedCustomers = [];
 
   @action
-  getAllPublishers() async {
+  getAllCustomers() async {
     isLoading = true;
 
     try {
@@ -35,7 +35,9 @@ abstract class CustomerControllerBase with Store {
 
       isLoading = false;
     } catch (e) {
-      CustomSnackBar().error('Houve um problema ao listar os clientes');
+      showSnackbar(
+        CustomSnackBar().error('Houve um problema ao listar os clientes'),
+      );
     }
   }
 
@@ -55,6 +57,9 @@ abstract class CustomerControllerBase with Store {
               e.name.toString().toLowerCase().contains(
                     (value.toLowerCase()),
                   ) ||
+              e.email.toString().toLowerCase().contains(
+                    (value.toLowerCase()),
+                  ) ||
               e.address.toString().toLowerCase().contains(
                     (value.toLowerCase()),
                   ) ||
@@ -69,23 +74,34 @@ abstract class CustomerControllerBase with Store {
   }
 
   @action
-  createPublisher(Customer customer) async {
+  createCustomer(Customer customer) async {
     try {
-      await repository.post(customer).then(
+      await repository
+          .post(customer)
+          .then(
             (res) => showSnackbar(
               CustomSnackBar().success('Cliente cadastrado com sucesso!'),
             ),
+          )
+          .catchError(
+            (err) => {
+              showSnackbar(
+                CustomSnackBar().error('Erro ao tentar cadastrado do cliente'),
+              ),
+            },
           );
       Modular.to.navigate('/customers/');
     } catch (err) {
-      CustomSnackBar().success('Erro ao tentar cadastrado do cliente');
+      showSnackbar(
+        CustomSnackBar().error('Erro ao tentar cadastrado do cliente'),
+      );
     } finally {
-      await getAllPublishers();
+      await getAllCustomers();
     }
   }
 
   @action
-  updatePublisher(Customer customer) async {
+  updateCustomer(Customer customer) async {
     try {
       await repository.put(customer).then(
             (res) => showSnackbar(
@@ -94,25 +110,38 @@ abstract class CustomerControllerBase with Store {
           );
       Modular.to.navigate('/customers/');
     } catch (err) {
-      CustomSnackBar().error('Erro ao tentar editar o cliente');
+      showSnackbar(
+        CustomSnackBar().error('Erro ao tentar editar o cliente'),
+      );
     } finally {
-      await getAllPublishers();
+      await getAllCustomers();
     }
   }
 
-  deletePublisher(Customer customer) async {
+  deleteCustomer(Customer customer) async {
     {
       try {
-        await repository.delete(customer).then(
-              (res) => {
-                CustomSnackBar().success('Cliente apagado com sucesso!'),
-                Modular.to.pop()
-              },
-            );
+        await repository.delete(customer).then((res) => {
+              if (res.statusCode != 200)
+                {
+                  showSnackbar(
+                    CustomSnackBar().error('Erro ao tentar apagar o Cliente'),
+                  ),
+                }
+              else
+                {
+                  showSnackbar(
+                    CustomSnackBar().success('Cliente apagado com sucesso!'),
+                  ),
+                  Modular.to.pop()
+                }
+            });
       } catch (err) {
-        CustomSnackBar().error('Erro ao tentar apagar o Cliente');
+        showSnackbar(
+          CustomSnackBar().error('Erro ao tentar apagar o Cliente'),
+        );
       } finally {
-        await getAllPublishers();
+        await getAllCustomers();
       }
     }
   }

@@ -23,9 +23,9 @@ class CustomerRepository {
     }
   }
 
-  Future<void> post(Customer customer) async {
-    await http.post(
-      Uri.parse('$_baseUrl/Livro'),
+  Future<http.Response> post(Customer customer) async {
+    return await http.post(
+      Uri.parse('$_baseUrl/Usuario'),
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -42,8 +42,8 @@ class CustomerRepository {
     );
   }
 
-  Future<void> put(Customer customer) async {
-    await http.put(
+  Future<http.Response> put(Customer customer) async {
+    return await http.put(
       Uri.parse('$_baseUrl/Usuario/${customer.id}'),
       headers: {
         "Accept": "application/json",
@@ -62,11 +62,8 @@ class CustomerRepository {
     );
   }
 
-  Future<void> delete(Customer customer) async {
-    await http.delete(
-        Uri.parse(
-          '$_baseUrl/Usuario/${customer.id}',
-        ),
+  Future<http.Response> delete(Customer customer) async {
+    return await http.delete(Uri.parse('$_baseUrl/Usuario/${customer.id}'),
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
