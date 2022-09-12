@@ -60,7 +60,7 @@ class _FormPublisherState extends State<FormPublisher> {
       } else {
         formKey.currentState?.save();
 
-        if (formData["id"] != null) {
+        if (formData["id"] != null && formData["id"] != "") {
           final publisher = Publisher(
             id: formData['id'],
             name: formData["nome"],

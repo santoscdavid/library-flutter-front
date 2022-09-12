@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:library_flutter/app/controllers/PublisherController/publisher_controller.dart';
+import 'package:library_flutter/app/controllers/BookController/book_controller.dart';
 import 'package:library_flutter/app/controllers/ThemeController/theme_controller.dart';
 import 'package:library_flutter/app/utils/compare_helpers.dart';
 import 'package:library_flutter/presentation/components/CustomButton/custom_button.dart';
@@ -9,33 +9,46 @@ import 'package:library_flutter/presentation/components/DeleteDialog/delete_dial
 import 'package:library_flutter/presentation/components/SearchInput/search_input.dart';
 import 'package:library_flutter/presentation/components/TitlePage/title_page.dart';
 
-class ListPublishers extends StatefulWidget {
-  const ListPublishers({
-    Key? key,
-  }) : super(key: key);
+class ListBooks extends StatefulWidget {
+  const ListBooks({Key? key}) : super(key: key);
 
   @override
-  State<ListPublishers> createState() => _ListPublishersState();
+  State<ListBooks> createState() => _ListBooksState();
 }
 
-class _ListPublishersState extends State<ListPublishers> {
-  final store = Modular.get<PublisherController>();
+class _ListBooksState extends State<ListBooks> {
+  final store = Modular.get<BookController>();
   final storeTheme = Modular.get<ThemeController>();
+
   int? sortColunIndex;
   bool isAscending = false;
 
   void onSort(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
-      store.publishers.sort(
+      store.books.sort(
         (a, b) => Compare().compareInt(ascending, a.id, b.id),
       );
     } else if (columnIndex == 1) {
-      store.publishers.sort(
+      store.books.sort(
         (a, b) => Compare().compareString(ascending, a.name, b.name),
       );
     } else if (columnIndex == 2) {
-      store.publishers.sort(
-        (a, b) => Compare().compareString(ascending, a.city, b.city),
+      store.books.sort(
+        (a, b) => Compare().compareString(ascending, a.author, b.author),
+      );
+    } else if (columnIndex == 3) {
+      store.books.sort(
+        (a, b) => Compare()
+            .compareString(ascending, a.publisher!.name, b.publisher!.name),
+      );
+    } else if (columnIndex == 4) {
+      store.books.sort(
+        (a, b) =>
+            Compare().compareInt(ascending, a.realeaseYear, b.realeaseYear),
+      );
+    } else if (columnIndex == 5) {
+      store.books.sort(
+        (a, b) => Compare().compareInt(ascending, a.quantity, b.quantity),
       );
     }
 
@@ -55,17 +68,18 @@ class _ListPublishersState extends State<ListPublishers> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const TitlePage(
-              title: "Editoras",
+              title: "Livros",
             ),
             SearchInput(
-              onChange: (text) => store.filter(text.toString()),
+              onChange: (e) {},
+              // onChange: (text) => store.filter(text.toString()),
             ),
           ],
         ),
         const Padding(padding: EdgeInsets.all(5)),
         Observer(
           builder: (_) => FittedBox(
-            child: store.publishers.isNotEmpty
+            child: store.books.isNotEmpty
                 ? DataTable(
                     sortColumnIndex: sortColunIndex,
                     sortAscending: isAscending,
@@ -83,35 +97,68 @@ class _ListPublishersState extends State<ListPublishers> {
                         onSort: onSort,
                       ),
                       DataColumn(
-                        label: const SizedBox(child: Text('Cidade')),
+                        label: const SizedBox(child: Text('Autor')),
+                        onSort: onSort,
+                      ),
+                      DataColumn(
+                        label: const SizedBox(child: Text('Editora')),
+                        onSort: onSort,
+                      ),
+                      DataColumn(
+                        label: const SizedBox(child: Text('Ano de lançamento')),
+                        onSort: onSort,
+                      ),
+                      DataColumn(
+                        label: const SizedBox(child: Text('Quantidade')),
                         onSort: onSort,
                       ),
                       const DataColumn(
                         label: SizedBox(child: Text('Opções')),
                       ),
                     ],
-                    rows: store.publishers
+                    rows: store.books
                         .map(
-                          (publisher) => DataRow(
+                          (book) => DataRow(
                             cells: <DataCell>[
                               DataCell(
                                 SizedBox(
                                   child: Text(
-                                    publisher.id.toString(),
+                                    book.id.toString(),
                                   ),
                                 ),
                               ),
                               DataCell(
                                 SizedBox(
                                   child: Text(
-                                    publisher.name.toString(),
+                                    book.name.toString(),
                                   ),
                                 ),
                               ),
                               DataCell(
                                 SizedBox(
                                   child: Text(
-                                    publisher.city.toString(),
+                                    book.author.toString(),
+                                  ),
+                                ),
+                              ),
+                              DataCell(
+                                SizedBox(
+                                  child: Text(
+                                    book.publisher!.name.toString(),
+                                  ),
+                                ),
+                              ),
+                              DataCell(
+                                SizedBox(
+                                  child: Text(
+                                    book.realeaseYear.toString(),
+                                  ),
+                                ),
+                              ),
+                              DataCell(
+                                SizedBox(
+                                  child: Text(
+                                    book.quantity.toString(),
                                   ),
                                 ),
                               ),
@@ -122,7 +169,7 @@ class _ListPublishersState extends State<ListPublishers> {
                                     constraints: const BoxConstraints(),
                                     onPressed: (() => {
                                           Modular.to.navigate(
-                                              "/publishers/form/${publisher.id}?name=${publisher.name}&city=${publisher.city}")
+                                              "/books/form/${book.id}?name=${book.name}&author=${book.author}")
                                         }),
                                     icon: const Icon(
                                       Icons.edit,
@@ -136,13 +183,10 @@ class _ListPublishersState extends State<ListPublishers> {
                                     onPressed: () {
                                       deleteDialog(
                                         context: context,
-                                        title:
-                                            'Apagar editora ${publisher.name}?',
+                                        title: 'Apagar livro ${book.name}?',
                                         text:
                                             'Todo dado relacionado a essa editora será apagado.',
-                                        onConfirm: () {
-                                          store.deletePublisher(publisher);
-                                        },
+                                        onConfirm: () {},
                                       );
                                     },
                                     icon: const Icon(
@@ -172,7 +216,7 @@ class _ListPublishersState extends State<ListPublishers> {
                         ),
                         const Padding(padding: EdgeInsets.all(5)),
                         const Text(
-                          "Não há nenhuma editora,\nou houve algum problema.",
+                          "Não há nenhum livro,\nou houve algum problema.",
                           style: TextStyle(
                             fontSize: 16,
                           ),
@@ -180,7 +224,7 @@ class _ListPublishersState extends State<ListPublishers> {
                         ),
                         CustomButton(
                           margin: 20,
-                          function: () => store.getAllPublishers,
+                          function: () => store.getAllBooks,
                           child: store.isLoading
                               ? Container(
                                   padding: const EdgeInsets.all(10),
