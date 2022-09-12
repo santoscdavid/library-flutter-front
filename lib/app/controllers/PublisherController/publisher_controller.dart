@@ -35,7 +35,9 @@ abstract class PublisherControllerBase with Store {
 
       isLoading = false;
     } catch (e) {
-      CustomSnackBar().error('Houve um problema ao listar editoras');
+      showSnackbar(
+        CustomSnackBar().error('Houve um problema ao listar editoras'),
+      );
     }
   }
 
@@ -69,13 +71,17 @@ abstract class PublisherControllerBase with Store {
   createPublisher(Publisher publisher) async {
     try {
       await repository.post(publisher).then(
-            (res) => showSnackbar(
-              CustomSnackBar().success('Editora cadastrada com sucesso!'),
-            ),
+            (res) => {
+              showSnackbar(
+                CustomSnackBar().success('Editora cadastrada com sucesso!'),
+              )
+            },
           );
       Modular.to.navigate('/publishers/');
     } catch (err) {
-      CustomSnackBar().success('Erro ao tentar cadastrar editora');
+      showSnackbar(
+        CustomSnackBar().error('Erro ao tentar cadastrar editora'),
+      );
     } finally {
       await getAllPublishers();
     }
@@ -91,7 +97,9 @@ abstract class PublisherControllerBase with Store {
           );
       Modular.to.navigate('/publishers/');
     } catch (err) {
-      CustomSnackBar().error('Erro ao tentar editar a editora');
+      showSnackbar(
+        CustomSnackBar().error('Erro ao tentar editar a editora'),
+      );
     } finally {
       await getAllPublishers();
     }
@@ -102,12 +110,16 @@ abstract class PublisherControllerBase with Store {
       try {
         await repository.delete(publisher).then(
               (res) => {
-                CustomSnackBar().success('Editora apagada com sucesso!'),
+                showSnackbar(
+                  CustomSnackBar().success('Editora apagada com sucesso!'),
+                ),
                 Modular.to.pop()
               },
             );
       } catch (err) {
-        CustomSnackBar().error('Erro ao tentar apagar a editora');
+        showSnackbar(
+          CustomSnackBar().error('Erro ao tentar apagar a editora'),
+        );
       } finally {
         await getAllPublishers();
       }

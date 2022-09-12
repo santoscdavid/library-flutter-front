@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/controllers/BookController/book_controller.dart';
@@ -180,8 +181,12 @@ class _FormBookState extends State<FormBook> {
                       ),
                       FormInput(
                         title: 'Quantidade',
+                        inputFormatter: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         initialValue: formData['quantity'],
                         icon: const Icon(Icons.archive),
+                        textInputType: TextInputType.number,
                         margin: 10.0,
                         focus: quantityFocus,
                         onSave: (quantity) => {
@@ -190,10 +195,14 @@ class _FormBookState extends State<FormBook> {
                               })
                         },
                         validator: (text) {
-                          final city = text ?? '';
+                          final quantity = text ?? '';
 
-                          if (city.trim().isEmpty) {
+                          if (quantity.trim().isEmpty) {
                             return 'Quantidade é obrigatório';
+                          }
+
+                          if (int.parse(quantity) < 0) {
+                            return 'Quantidade invalidade';
                           }
 
                           return null;
@@ -201,7 +210,11 @@ class _FormBookState extends State<FormBook> {
                       ),
                       FormInput(
                         title: 'Ano de lançamento',
+                        inputFormatter: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         initialValue: formData['realeaseYear'],
+                        textInputType: TextInputType.number,
                         icon: const Icon(Icons.calendar_month),
                         margin: 10.0,
                         focus: realeaseYearFocus,
@@ -217,6 +230,10 @@ class _FormBookState extends State<FormBook> {
                             return 'Quantidade é obrigatório';
                           }
 
+                          if (realeaseYear.length < 3 ||
+                              realeaseYear.length > 4) {
+                            return 'Informe uma data valida';
+                          }
                           return null;
                         },
                       ),

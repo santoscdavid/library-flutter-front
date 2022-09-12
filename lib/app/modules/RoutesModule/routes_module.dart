@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/modules/BooksModule/books_module.dart';
+import 'package:library_flutter/app/modules/CustomersModule/customers_module.dart';
 import 'package:library_flutter/app/modules/PublishersModule/publishers_module.dart';
-import 'package:library_flutter/presentation/views/Customers/customers_page.dart';
 import 'package:library_flutter/presentation/views/Rents/rents_page.dart';
 
 class RoutesModule extends Module {
@@ -18,9 +18,9 @@ class RoutesModule extends Module {
           '/books',
           module: BooksModule(),
         ),
-        ChildRoute(
+        ModuleRoute(
           '/customers',
-          child: (context, args) => const CustomersPage(),
+          module: CustomersModule(),
         ),
         ChildRoute(
           '/rents',
