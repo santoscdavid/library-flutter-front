@@ -27,7 +27,13 @@ class RentsModule extends Module {
         ),
         ChildRoute(
           '/form/:id',
-          child: (context, args) => const FormRent(),
+          child: (context, args) => FormRent(
+            id: args.params["id"],
+            bookId: args.queryParams["bookId"],
+            customerId: args.queryParams["customerId"],
+            rentStart: args.queryParams["rentStart"],
+            rentEnd: args.queryParams["rentEnd"],
+          ),
           transition: TransitionType.downToUp,
           duration: const Duration(milliseconds: 700),
         ),

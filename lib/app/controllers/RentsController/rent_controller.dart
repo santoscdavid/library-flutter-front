@@ -76,6 +76,13 @@ abstract class RentControllerBase with Store {
   @action
   createRent(Rent rent) async {
     try {
+      rent.rentStart = DateTime.parse(
+        rent.rentStart.toString(),
+      ).toIso8601String();
+      rent.rentEnd = DateTime.parse(
+        rent.rentEnd.toString(),
+      ).toIso8601String();
+
       await repository.post(rent).then(
             (res) => showSnackbar(
               CustomSnackBar().success('Aluguel cadastrado com sucesso!'),
@@ -94,6 +101,12 @@ abstract class RentControllerBase with Store {
   @action
   updateRent(Rent rent) async {
     try {
+      rent.rentStart = DateTime.parse(
+        rent.rentStart.toString(),
+      ).toIso8601String();
+      rent.rentEnd = DateTime.parse(
+        rent.rentEnd.toString(),
+      ).toIso8601String();
       await repository.put(rent).then(
             (res) => showSnackbar(
               CustomSnackBar().success('Aluguel editado com sucesso!'),

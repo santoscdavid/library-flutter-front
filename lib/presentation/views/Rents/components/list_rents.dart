@@ -114,9 +114,8 @@ class _ListRentsState extends State<ListRents> {
                         label: const SizedBox(child: Text('Devolução')),
                         onSort: onSort,
                       ),
-                      DataColumn(
-                        label: const SizedBox(child: Text('Status')),
-                        onSort: onSort,
+                      const DataColumn(
+                        label: SizedBox(child: Text('Status')),
                       ),
                       const DataColumn(
                         label: SizedBox(child: Text('Opções')),
@@ -254,35 +253,43 @@ class _ListRentsState extends State<ListRents> {
                                     IconButton(
                                       padding: const EdgeInsets.all(2),
                                       constraints: const BoxConstraints(),
-                                      onPressed: (() => {
-                                            Modular.to.navigate(
-                                                "/rents/form/${rent.id}?bookId=${rent.book!.id}&customerId=${rent.customer!.id}&rentStart=${rent.rentStart}&rentEnd=${rent.rentEnd}&devolution=${rent.devolution}")
-                                          }),
-                                      icon: const Icon(
+                                      onPressed: rent.devolution != null
+                                          ? null
+                                          : () => {
+                                                Modular.to.navigate(
+                                                    "/rents/form/${rent.id}?bookId=${rent.book!.id}&customerId=${rent.customer!.id}&rentStart=${rent.rentStart}&rentEnd=${rent.rentEnd}&devolution=${rent.devolution}")
+                                              },
+                                      icon: Icon(
                                         Icons.edit,
                                         size: 20,
-                                        color: Colors.deepOrange,
+                                        color: rent.devolution != null
+                                            ? Colors.grey
+                                            : Colors.deepOrange,
                                       ),
                                     ),
                                     IconButton(
                                       padding: const EdgeInsets.all(2),
                                       constraints: const BoxConstraints(),
-                                      onPressed: () {
-                                        deleteDialog(
-                                          context: context,
-                                          title:
-                                              'Apagar o aluguel de ${rent.customer!.name}?',
-                                          text:
-                                              'Todo dado relacionado a esse aluguel será apagado.',
-                                          onConfirm: () {
-                                            store.deleteRent(rent);
-                                          },
-                                        );
-                                      },
-                                      icon: const Icon(
+                                      onPressed: rent.devolution != null
+                                          ? null
+                                          : () {
+                                              deleteDialog(
+                                                context: context,
+                                                title:
+                                                    'Apagar o aluguel de ${rent.customer!.name}?',
+                                                text:
+                                                    'Todo dado relacionado a esse aluguel será apagado.',
+                                                onConfirm: () {
+                                                  store.deleteRent(rent);
+                                                },
+                                              );
+                                            },
+                                      icon: Icon(
                                         Icons.delete,
                                         size: 20,
-                                        color: Colors.red,
+                                        color: rent.devolution != null
+                                            ? Colors.grey
+                                            : Colors.red,
                                       ),
                                     ),
                                   ],

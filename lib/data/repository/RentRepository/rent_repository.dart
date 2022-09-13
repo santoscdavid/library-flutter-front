@@ -32,8 +32,8 @@ class RentRepository {
       },
       body: jsonEncode(
         {
-          'aluguelFeito': rent.rentStart,
-          'previsaoEntrega': rent.rentEnd,
+          'aluguelFeito': rent.rentStart.toString(),
+          'previsaoEntrega': rent.rentEnd.toString(),
           'devolucao': rent.devolution,
           'livroId': int.parse(rent.book!.id),
           'usuarioId': int.parse(rent.customer!.id),
@@ -53,8 +53,8 @@ class RentRepository {
       body: jsonEncode(
         {
           'id': rent.id,
-          'aluguelFeito': rent.rentStart,
-          'previsaoEntrega': rent.rentEnd,
+          'aluguelFeito': rent.rentStart.toString(),
+          'previsaoEntrega': rent.rentEnd.toString(),
           'devolucao': rent.devolution,
           'livroId': rent.book!.id,
           'usuarioId': rent.customer!.id,
