@@ -105,6 +105,7 @@ abstract class PublisherControllerBase with Store {
     }
   }
 
+  @action
   deletePublisher(Publisher publisher) async {
     {
       try {

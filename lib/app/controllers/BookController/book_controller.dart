@@ -105,6 +105,7 @@ abstract class BookControllerBase with Store {
     }
   }
 
+  @action
   deleteBook(Book book) async {
     {
       try {

@@ -37,37 +37,38 @@ class FormInput extends StatelessWidget {
         keyboardType: textInputType ?? TextInputType.text,
         cursorColor: Colors.deepPurple,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-            suffixIcon: icon,
-            suffixIconColor: Colors.deepPurple,
-            enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.purple,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(10.0)),
-            focusedBorder: OutlineInputBorder(
+          contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+          suffixIcon: icon,
+          suffixIconColor: Colors.deepPurple,
+          enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Colors.deepPurple,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Colors.red,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Colors.red,
+                color: Colors.purple,
                 width: 1,
               ),
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10.0)),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.deepPurple,
+              width: 2,
             ),
-            labelText: title),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          labelText: title,
+        ),
         textInputAction: TextInputAction.next,
         inputFormatters: inputFormatter,
         focusNode: focus,

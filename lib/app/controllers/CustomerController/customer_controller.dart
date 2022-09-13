@@ -118,6 +118,7 @@ abstract class CustomerControllerBase with Store {
     }
   }
 
+  @action
   deleteCustomer(Customer customer) async {
     {
       try {
