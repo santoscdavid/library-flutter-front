@@ -43,9 +43,9 @@ class RentRepository {
     );
   }
 
-  Future<void> put(Rent rent) async {
-    await http.put(
-      Uri.parse('$_baseUrl/Livro/${rent.id}'),
+  Future<http.Response> put(Rent rent) async {
+    return await http.put(
+      Uri.parse('$_baseUrl/Aluguel/${rent.id}'),
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -56,8 +56,8 @@ class RentRepository {
           'aluguelFeito': rent.rentStart,
           'previsaoEntrega': rent.rentEnd,
           'devolucao': rent.devolution,
-          'livroId': int.parse(rent.book!.id),
-          'usuarioId': int.parse(rent.customer!.id),
+          'livroId': rent.book!.id,
+          'usuarioId': rent.customer!.id,
         },
       ),
       encoding: Encoding.getByName("utf-8"),
@@ -68,7 +68,7 @@ class RentRepository {
   Future<void> delete(Rent rent) async {
     await http.delete(
         Uri.parse(
-          '$_baseUrl/Livro/${rent.id}',
+          '$_baseUrl/Aluguel/${rent.id}',
         ),
         headers: {
           "Accept": "application/json",

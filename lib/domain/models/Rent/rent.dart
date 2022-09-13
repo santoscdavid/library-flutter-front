@@ -21,10 +21,10 @@ class Rent {
   Rent.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     customer =
-        json["customer"] != null ? Customer.fromJson(json["usuario"]) : null;
-    book = json["book"] != null ? Book.fromJson(json["book"]) : null;
-    rentStart = json["rentStart"];
-    rentEnd = json["rentEnd"];
-    devolution = json["devolution"];
+        json["usuario"] != null ? Customer.fromJson(json["usuario"]) : null;
+    book = json["livro"] != null ? Book.fromJson(json["livro"]) : null;
+    rentStart = json["aluguelFeito"];
+    rentEnd = json["previsaoEntrega"];
+    devolution = json["devolucao"];
   }
 }

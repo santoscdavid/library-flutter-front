@@ -69,7 +69,7 @@ abstract class RentControllerBase with Store {
 
       isLoading = false;
     } catch (e) {
-      CustomSnackBar().error('Houve um problema ao listar editoras');
+      CustomSnackBar().error('Houve um problema ao listar alugueis');
     }
   }
 
@@ -84,7 +84,7 @@ abstract class RentControllerBase with Store {
       Modular.to.navigate('/rents/');
     } catch (err) {
       showSnackbar(
-        CustomSnackBar().error('Erro ao tentar cadastrar Aluguel'),
+        CustomSnackBar().error('Erro ao tentar cadastrar aluguel'),
       );
     } finally {
       await getAllRents();
@@ -102,13 +102,41 @@ abstract class RentControllerBase with Store {
       Modular.to.navigate('/rents/');
     } catch (err) {
       showSnackbar(
-        CustomSnackBar().error('Erro ao tentar editar Aluguel'),
+        CustomSnackBar().error('Erro ao tentar editar aluguel'),
       );
     } finally {
       await getAllRents();
     }
   }
 
+  @action
+  completeRent(Rent rent) async {
+    try {
+      rent.devolution = DateTime.now().toIso8601String();
+      await repository.put(rent).then(
+            (res) => {
+              if (res.statusCode != 201)
+                showSnackbar(
+                  CustomSnackBar().error('Erro ao tentar finalizar aluguel!'),
+                )
+              else
+                {
+                  showSnackbar(
+                    CustomSnackBar().success('Aluguel finalizado com sucesso!'),
+                  )
+                }
+            },
+          );
+    } catch (err) {
+      showSnackbar(
+        CustomSnackBar().error('Erro ao tentar finalizar aluguel'),
+      );
+    } finally {
+      await getAllRents();
+    }
+  }
+
+  @action
   deleteRent(Rent rent) async {
     {
       try {
@@ -122,7 +150,7 @@ abstract class RentControllerBase with Store {
             );
       } catch (err) {
         showSnackbar(
-          CustomSnackBar().error('Erro ao tentar apagar o Aluguel'),
+          CustomSnackBar().error('Erro ao tentar apagar o aluguel'),
         );
       } finally {
         await getAllRents();
