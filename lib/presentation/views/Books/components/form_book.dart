@@ -10,6 +10,7 @@ import 'package:library_flutter/domain/models/Publisher/publisher.dart';
 import 'package:library_flutter/presentation/components/AppBar/custom_appbar.dart';
 import 'package:library_flutter/presentation/components/FormInput/form_input.dart';
 import 'package:library_flutter/presentation/components/ReturnButton/return_button.dart';
+import 'package:library_flutter/presentation/components/SelectInput/select_input.dart';
 
 class FormBook extends StatefulWidget {
   final String? id;
@@ -237,74 +238,15 @@ class _FormBookState extends State<FormBook> {
                           return null;
                         },
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: InputDecorator(
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                            labelText: 'Editora',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            suffixIconColor: Colors.deepPurple,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.purple,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Colors.deepPurple,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Colors.red,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Colors.red,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              value: formData['publisherId'],
-                              icon: const Icon(Icons.arrow_drop_down),
-                              elevation: 16,
-                              style: TextStyle(
-                                color: storeTheme.isDarkMode
-                                    ? Colors.white
-                                    : Colors.deepPurple,
-                              ),
-                              underline: Container(
-                                height: 1,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              items: storePublisher.publishers
-                                  .map<DropdownMenuItem<String>>((item) {
-                                return DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(item.name),
-                                );
-                              }).toList(),
-                              onChanged: (String? publisherId) => {
-                                setState(() => {
-                                      formData['publisherId'] =
-                                          publisherId ?? '',
-                                    })
-                              },
-                            ),
-                          ),
-                        ),
+                      SelectInput(
+                        title: 'Editoras',
+                        value: formData['publisherId'],
+                        list: storePublisher.publishers,
+                        onChange: (String? publisherId) => {
+                          setState(() => {
+                                formData['publisherId'] = publisherId ?? '',
+                              }),
+                        },
                       ),
                       Container(
                         margin: const EdgeInsets.all(10.0),
