@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/modules/BooksModule/books_module.dart';
 import 'package:library_flutter/app/modules/CustomersModule/customers_module.dart';
+import 'package:library_flutter/app/modules/DashboardModule/dashboard_module.dart';
 import 'package:library_flutter/app/modules/PublishersModule/publishers_module.dart';
 import 'package:library_flutter/app/modules/RentsModule/rents_module.dart';
 
@@ -10,6 +11,10 @@ class RoutesModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
+        ModuleRoute(
+          '/',
+          module: DashboardModule(),
+        ),
         ModuleRoute(
           '/publishers',
           module: PublishersModule(),

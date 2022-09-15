@@ -41,6 +41,22 @@ mixin _$RentController on RentControllerBase, Store {
     });
   }
 
+  late final _$timelineAtom =
+      Atom(name: 'RentControllerBase.timeline', context: context);
+
+  @override
+  List<Timeline> get timeline {
+    _$timelineAtom.reportRead();
+    return super.timeline;
+  }
+
+  @override
+  set timeline(List<Timeline> value) {
+    _$timelineAtom.reportWrite(value, super.timeline, () {
+      super.timeline = value;
+    });
+  }
+
   late final _$cachedRentsAtom =
       Atom(name: 'RentControllerBase.cachedRents', context: context);
 
@@ -65,6 +81,14 @@ mixin _$RentController on RentControllerBase, Store {
     return _$getAllRentsAsyncAction.run(() => super.getAllRents());
   }
 
+  late final _$dataTimelineAsyncAction =
+      AsyncAction('RentControllerBase.dataTimeline', context: context);
+
+  @override
+  Future dataTimeline() {
+    return _$dataTimelineAsyncAction.run(() => super.dataTimeline());
+  }
+
   late final _$createRentAsyncAction =
       AsyncAction('RentControllerBase.createRent', context: context);
 
@@ -81,11 +105,28 @@ mixin _$RentController on RentControllerBase, Store {
     return _$updateRentAsyncAction.run(() => super.updateRent(rent));
   }
 
+  late final _$completeRentAsyncAction =
+      AsyncAction('RentControllerBase.completeRent', context: context);
+
+  @override
+  Future completeRent(Rent rent) {
+    return _$completeRentAsyncAction.run(() => super.completeRent(rent));
+  }
+
+  late final _$deleteRentAsyncAction =
+      AsyncAction('RentControllerBase.deleteRent', context: context);
+
+  @override
+  Future deleteRent(Rent rent) {
+    return _$deleteRentAsyncAction.run(() => super.deleteRent(rent));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 rents: ${rents},
+timeline: ${timeline},
 cachedRents: ${cachedRents}
     ''';
   }

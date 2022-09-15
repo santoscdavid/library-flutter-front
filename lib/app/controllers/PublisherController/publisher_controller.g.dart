@@ -91,6 +91,15 @@ mixin _$PublisherController on PublisherControllerBase, Store {
         .run(() => super.updatePublisher(publisher));
   }
 
+  late final _$deletePublisherAsyncAction =
+      AsyncAction('PublisherControllerBase.deletePublisher', context: context);
+
+  @override
+  Future deletePublisher(Publisher publisher) {
+    return _$deletePublisherAsyncAction
+        .run(() => super.deletePublisher(publisher));
+  }
+
   @override
   String toString() {
     return '''

@@ -91,6 +91,15 @@ mixin _$CustomerController on CustomerControllerBase, Store {
         .run(() => super.updateCustomer(customer));
   }
 
+  late final _$deleteCustomerAsyncAction =
+      AsyncAction('CustomerControllerBase.deleteCustomer', context: context);
+
+  @override
+  Future deleteCustomer(Customer customer) {
+    return _$deleteCustomerAsyncAction
+        .run(() => super.deleteCustomer(customer));
+  }
+
   @override
   String toString() {
     return '''

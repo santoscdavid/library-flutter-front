@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/utils/custom_snackbars.dart';
 import 'package:library_flutter/app/utils/global_scaffold.dart';
 import 'package:library_flutter/data/repository/RentRepository/rent_repository.dart';
+import 'package:library_flutter/domain/models/Charts/timeline.dart';
 import 'package:library_flutter/domain/models/Rent/rent.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,6 +15,7 @@ abstract class RentControllerBase with Store {
 
   RentControllerBase(this.repository) {
     getAllRents();
+    dataTimeline();
   }
 
   @observable
@@ -21,6 +23,9 @@ abstract class RentControllerBase with Store {
 
   @observable
   List<Rent> rents = [];
+
+  @observable
+  List<Timeline> timeline = [];
 
   @observable
   List<Rent> cachedRents = [];
@@ -66,6 +71,19 @@ abstract class RentControllerBase with Store {
     try {
       rents = await repository.getAll();
       cachedRents = rents;
+
+      isLoading = false;
+    } catch (e) {
+      CustomSnackBar().error('Houve um problema ao listar alugueis');
+    }
+  }
+
+  @action
+  dataTimeline() async {
+    isLoading = true;
+
+    try {
+      timeline = await repository.getTotalRentForDay();
 
       isLoading = false;
     } catch (e) {

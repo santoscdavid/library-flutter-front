@@ -81,6 +81,14 @@ mixin _$BookController on BookControllerBase, Store {
     return _$updateBookAsyncAction.run(() => super.updateBook(book));
   }
 
+  late final _$deleteBookAsyncAction =
+      AsyncAction('BookControllerBase.deleteBook', context: context);
+
+  @override
+  Future deleteBook(Book book) {
+    return _$deleteBookAsyncAction.run(() => super.deleteBook(book));
+  }
+
   @override
   String toString() {
     return '''
