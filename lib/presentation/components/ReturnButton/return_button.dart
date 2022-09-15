@@ -1,8 +1,8 @@
+import 'package:design_system_library_flutter/app/components/commom/Texts/StrokeText/stroke_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/controllers/ThemeController/theme_controller.dart';
-import 'package:library_flutter/presentation/components/StrokeText/stroke_text.dart';
 
 class ReturnButton extends StatelessWidget {
   const ReturnButton({Key? key, required this.backRoute, required this.title})

@@ -176,6 +176,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.3"
+  design_system_library_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: ac462d6fb8d323b35f3c491c6e7f80cbbbcf01af
+      url: "https://github.com/DSantos69/library-flutter-front-system-design.git"
+    source: git
+    version: "0.0.1"
   dio:
     dependency: "direct main"
     description:

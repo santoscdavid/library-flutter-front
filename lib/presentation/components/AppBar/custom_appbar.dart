@@ -1,5 +1,5 @@
+import 'package:design_system_library_flutter/app/components/desktop/Buttons/DropdownMenu/dropdown_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:library_flutter/presentation/components/DropdownMenu/dropdown_menu.dart';
 import 'package:library_flutter/presentation/components/ThemeSwitch/theme_switch.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {

@@ -1,8 +1,7 @@
+import 'package:design_system_library_flutter/app/components/commom/Texts/StrokeText/stroke_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:library_flutter/app/controllers/ThemeController/theme_controller.dart';
-
-import '../StrokeText/stroke_text.dart';
 
 class IconText extends StatelessWidget {
   const IconText({
