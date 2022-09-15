@@ -16,6 +16,7 @@ abstract class RentControllerBase with Store {
   RentControllerBase(this.repository) {
     getAllRents();
     dataTimeline();
+    getLastRents();
   }
 
   @observable
@@ -23,6 +24,9 @@ abstract class RentControllerBase with Store {
 
   @observable
   List<Rent> rents = [];
+
+  @observable
+  List<Rent> lastRents = [];
 
   @observable
   List<Timeline> timeline = [];
@@ -71,6 +75,19 @@ abstract class RentControllerBase with Store {
     try {
       rents = await repository.getAll();
       cachedRents = rents;
+
+      isLoading = false;
+    } catch (e) {
+      CustomSnackBar().error('Houve um problema ao listar alugueis');
+    }
+  }
+
+  @action
+  getLastRents() async {
+    isLoading = true;
+
+    try {
+      lastRents = await repository.lastRents();
 
       isLoading = false;
     } catch (e) {

@@ -22,7 +22,7 @@ class _SimpleBarChartState extends State<SimpleBarChart> {
   }
 
   static Future<List<charts.Series<Bar, String>>> createData() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
 
     final storePublisher = Modular.get<PublisherController>();
     final storeCustomer = Modular.get<CustomerController>();

@@ -24,6 +24,25 @@ class RentRepository {
     }
   }
 
+  Future<List<Rent>> lastRents() async {
+    try {
+      final response =
+          await http.get(Uri.parse('$_baseUrl/Aluguel/LastAluguel?PageSize=5'));
+
+      if (response.statusCode != 200) {
+        throw Exception();
+      } else {
+        final decodedBody = jsonDecode(response.body);
+        final body = (decodedBody as List);
+        final data = body.map((item) => Rent.fromJson(item)).toList();
+
+        return data;
+      }
+    } catch (err) {
+      return List.empty();
+    }
+  }
+
   Future<List<Timeline>> getTotalRentForDay() async {
     try {
       final response =

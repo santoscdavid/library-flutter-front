@@ -15,7 +15,7 @@ class SimpleTimeSeriesChart extends StatefulWidget {
 
 class _SimpleTimeSeriesChartState extends State<SimpleTimeSeriesChart> {
   static Future<List<charts.Series<Timeline, DateTime>>> createData() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
 
     final storeRent = Modular.get<RentController>();
 

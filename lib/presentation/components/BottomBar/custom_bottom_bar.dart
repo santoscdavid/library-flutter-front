@@ -50,7 +50,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
               backgroundColor: Colors.deepPurple,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book),
+              icon: Icon(Icons.handshake),
               label: 'Alugueis',
               backgroundColor: Colors.deepPurple,
             ),
