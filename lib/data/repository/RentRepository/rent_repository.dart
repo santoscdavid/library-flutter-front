@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:library_flutter/domain/models/Charts/timeline.dart';
 import 'package:library_flutter/domain/models/Rent/rent.dart';
 
 class RentRepository {
@@ -15,6 +16,44 @@ class RentRepository {
         final decodedBody = jsonDecode(response.body);
         final body = (decodedBody as List);
         final data = body.map((item) => Rent.fromJson(item)).toList();
+
+        return data;
+      }
+    } catch (err) {
+      return List.empty();
+    }
+  }
+
+  Future<List<Rent>> lastRents() async {
+    try {
+      final response =
+          await http.get(Uri.parse('$_baseUrl/Aluguel/LastAluguel?PageSize=5'));
+
+      if (response.statusCode != 200) {
+        throw Exception();
+      } else {
+        final decodedBody = jsonDecode(response.body);
+        final body = (decodedBody as List);
+        final data = body.map((item) => Rent.fromJson(item)).toList();
+
+        return data;
+      }
+    } catch (err) {
+      return List.empty();
+    }
+  }
+
+  Future<List<Timeline>> getTotalRentForDay() async {
+    try {
+      final response =
+          await http.get(Uri.parse('$_baseUrl/Aluguel/totalRentsForDay'));
+
+      if (response.statusCode != 200) {
+        throw Exception();
+      } else {
+        final decodedBody = jsonDecode(response.body);
+        final body = (decodedBody as List);
+        final data = body.map((item) => Timeline.fromJson(item)).toList();
 
         return data;
       }
@@ -64,7 +103,6 @@ class RentRepository {
     );
   }
 
-  // TODO: Ajustar retorno
   Future<void> delete(Rent rent) async {
     await http.delete(
         Uri.parse(
